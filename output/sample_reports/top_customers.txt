@@ -1,0 +1,16 @@
+
+=== TOP_CUSTOMERS REPORT ===
+
+|   Customer ID | Name               |    Revenue |
+|---------------|--------------------|------------|
+|           313 | Alexis Tran        | 258,466.47 |
+|           390 | Bradley Tran       | 234,972.61 |
+|           476 | Seth Matthews      | 232,207.82 |
+|             7 | Shannon Ray        | 222,657.00 |
+|           488 | Robert Hines       | 222,276.60 |
+|           460 | James Nash         | 212,308.59 |
+|           457 | Jeremiah Baker     | 211,507.52 |
+|           512 | Charles Holland    | 201,810.09 |
+|           483 | Stephanie Evans    | 184,598.60 |
+|           430 | Rachael Howard DDS | 184,489.33 |
+

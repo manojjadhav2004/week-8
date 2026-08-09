@@ -1,0 +1,153 @@
+product_id,product_name,category,subcategory,cost_price
+1,Where Mobile,Electronics,Mobiles,832.5
+2,Town Camera,Electronics,Cameras,1059.91
+3,Because Laptop,Electronics,Laptops,3605.9
+4,Federal Accessorie,Electronics,Accessories,697.29
+5,Piece Accessorie,Electronics,Accessories,575.61
+6,Under Laptop,Electronics,Laptops,1373.98
+7,   OF LAPTOP   ,Electronics,Laptops,300.5
+8,Issue Camera,Electronics,Cameras,2119.77
+9,Even Laptop,Electronics,Laptops,4672.07
+10,current accessorie  ,Electronics,Accessories,838.74
+11,Accept Camera,Electronics,Cameras,1577.28
+12,   SECURITY MOBILE   ,Electronics,Mobiles,1996.55
+13,Six Camera,Electronics,Cameras,1114.96
+14,   STRATEGY ACCESSORIE   ,Electronics,Accessories,1442.71
+15,account camera  ,Electronics,Cameras,90.48
+16,Participant Mobile,Electronics,Mobiles,4418.16
+17,Necessary Accessorie,Electronics,Accessories,1861.39
+18,   BUY CAMERA   ,Electronics,Cameras,2830.99
+19,Nature Accessorie,Electronics,Accessories,413.98
+20,Account Camera,Electronics,Cameras,1434.62
+21,   HOW MOBILE   ,Electronics,Mobiles,528.57
+22,Real Accessorie,Electronics,Accessories,1728.47
+23,Describe Accessorie,Electronics,Accessories,1035.34
+24,Rise Camera,Electronics,Cameras,274.25
+25,Summer Laptop,Electronics,Laptops,4029.63
+26,   FOUR CAMERA   ,Electronics,Cameras,4471.0
+27,Issue Laptop,Electronics,Laptops,3084.69
+28,High Laptop,Electronics,Laptops,3101.68
+29,Both Accessorie,Electronics,Accessories,2561.21
+30,Clear Camera,Electronics,Cameras,1533.96
+31,Last Mobile,Electronics,Mobiles,3385.34
+32,Reach Camera,Electronics,Cameras,3993.94
+33,Pay Mobile,Electronics,Mobiles,1364.38
+34,Environment Laptop,Electronics,Laptops,2938.44
+35,Every Laptop,Electronics,Laptops,3619.86
+36,   TOP CAMERA   ,Electronics,Cameras,3419.6
+37,North Mobile,Electronics,Mobiles,3517.58
+38,   LAND WOMEN   ,Clothing,Women,1602.78
+39,Other Women,Clothing,Women,1059.26
+40,History Footwear,Clothing,Footwear,3692.39
+41,Population Men,Clothing,Men,2617.48
+42,Fact Kid,Clothing,Kids,2417.94
+43,Response Footwear,Clothing,Footwear,907.25
+44,Industry Kid,Clothing,Kids,3395.55
+45,Someone Kid,Clothing,Kids,1001.71
+46,democrat women  ,Clothing,Women,1527.57
+47,Job Kid,Clothing,Kids,3539.26
+48,Old Footwear,Clothing,Footwear,1776.58
+49,step kid  ,Clothing,Kids,2888.71
+50,Onto Footwear,Clothing,Footwear,2002.94
+51,Meeting Kid,Clothing,Kids,4032.85
+52,   COUNTRY KID   ,Clothing,Kids,4778.8
+53,Hospital Men,Clothing,Men,2239.76
+54,Operation Kid,Clothing,Kids,1109.23
+55,One Kid,Clothing,Kids,3496.05
+56,   MEMBER WOMEN   ,Clothing,Women,3717.41
+57,environment women  ,Clothing,Women,3365.68
+58,Food Women,Clothing,Women,309.83
+59,Participant Footwear,Clothing,Footwear,2388.4
+60,   GUY WOMEN   ,Clothing,Women,2774.25
+61,Staff Women,Clothing,Women,4678.41
+62,Season Footwear,Clothing,Footwear,1037.31
+63,Information Kid,Clothing,Kids,3247.19
+64,Simply Men,Clothing,Men,1199.49
+65,Certainly Men,Clothing,Men,916.57
+66,Top Women,Clothing,Women,229.88
+67,Treat Footwear,Clothing,Footwear,972.24
+68,Receive Kid,Clothing,Kids,95.87
+69,By Men,Clothing,Men,1708.46
+70,Small Footwear,Clothing,Footwear,2739.34
+71,Drug Footwear,Clothing,Footwear,714.29
+72,likely footwear  ,Clothing,Footwear,4053.63
+73,stay kid  ,Clothing,Kids,2321.63
+74,Scene Kid,Clothing,Kids,119.72
+75,Color Decor,Home,Decor,2860.52
+76,black kitchen  ,Home,Kitchen,4287.93
+77,Difficult Bedding,Home,Bedding,2600.64
+78,Movie Furniture,Home,Furniture,522.16
+79,Institution Kitchen,Home,Kitchen,4682.34
+80,stock furniture  ,Home,Furniture,1215.83
+81,Ground Decor,Home,Decor,1544.63
+82,suddenly furniture  ,Home,Furniture,1829.78
+83,   OIL KITCHEN   ,Home,Kitchen,635.21
+84,positive decor  ,Home,Decor,3446.06
+85,Same Decor,Home,Decor,3211.62
+86,Return Decor,Home,Decor,1143.2
+87,Seat Kitchen,Home,Kitchen,2302.14
+88,Area Decor,Home,Decor,2768.71
+89,College Bedding,Home,Bedding,4019.88
+90,Improve Kitchen,Home,Kitchen,3417.69
+91,Provide Furniture,Home,Furniture,2664.46
+92,   ACCEPT DECOR   ,Home,Decor,2842.64
+93,Summer Furniture,Home,Furniture,4519.3
+94,Benefit Kitchen,Home,Kitchen,791.77
+95,Than Decor,Home,Decor,2237.11
+96,Check Kitchen,Home,Kitchen,2469.7
+97,Market Bedding,Home,Bedding,2294.49
+98,With Bedding,Home,Bedding,335.8
+99,Plan Bedding,Home,Bedding,1575.44
+100,Learn Furniture,Home,Furniture,4091.44
+101,Behavior Kitchen,Home,Kitchen,274.18
+102,Attack Decor,Home,Decor,2728.76
+103,Everyone Furniture,Home,Furniture,391.64
+104,   DOCTOR BEDDING   ,Home,Bedding,2073.89
+105,Hospital Kitchen,Home,Kitchen,4892.75
+106,Base Bedding,Home,Bedding,4462.1
+107,Politics Bedding,Home,Bedding,4538.5
+108,   ALWAYS BEDDING   ,Home,Bedding,4822.51
+109,Shake Kitchen,Home,Kitchen,1771.46
+110,If Kitchen,Home,Kitchen,1995.64
+111,Word Kitchen,Home,Kitchen,1152.32
+112,Institution Fiction,Books,Fiction,4893.53
+113,Positive Comic,Books,Comics,2745.0
+114,Reality Comic,Books,Comics,1275.18
+115,near academic  ,Books,Academic,982.98
+116,   FEW FICTION   ,Books,Fiction,3317.98
+117,seek fiction  ,Books,Fiction,383.09
+118,Picture Fiction,Books,Fiction,3376.52
+119,art fiction  ,Books,Fiction,268.97
+120,young comic  ,Books,Comics,1125.48
+121,   STAFF FICTION   ,Books,Fiction,4967.74
+122,Ten Non-Fiction,Books,Non-Fiction,3671.01
+123,Continue Academic,Books,Academic,3874.06
+124,push academic  ,Books,Academic,4387.48
+125,Miss Non-Fiction,Books,Non-Fiction,1412.01
+126,Leg Non-Fiction,Books,Non-Fiction,2164.64
+127,   ACTION COMIC   ,Books,Comics,1754.85
+128,Defense Comic,Books,Comics,1627.74
+129,To Comic,Books,Comics,1534.45
+130,Realize Non-Fiction,Books,Non-Fiction,2393.92
+131,Word Non-Fiction,Books,Non-Fiction,3552.51
+132,Summer Comic,Books,Comics,2833.81
+133,National Comic,Books,Comics,713.76
+134,feeling non-fiction  ,Books,Non-Fiction,1684.8
+135,Day Fiction,Books,Fiction,4243.31
+136,Along Fiction,Books,Fiction,4155.56
+137,step fiction  ,Books,Fiction,3384.68
+138,Place Fiction,Books,Fiction,981.41
+139,Mrs Non-Fiction,Books,Non-Fiction,4353.9
+140,Name Academic,Books,Academic,4549.52
+141,Say Non-Fiction,Books,Non-Fiction,4812.28
+142,Each Fiction,Books,Fiction,3783.94
+143,Possible Non-Fiction,Books,Non-Fiction,3533.65
+144,Condition Comic,Books,Comics,2782.79
+145,Represent Academic,Books,Academic,2691.57
+146,Also Academic,Books,Academic,1830.24
+147,Here Comic,Books,Comics,4023.94
+148,Edge Comic,Books,Comics,1635.15
+53,Hospital Men,Clothing,Men,2239.76
+95,Than Decor,Home,Decor,2237.11
+81,Ground Decor,Home,Decor,1544.63
+106,Base Bedding,Home,Bedding,4462.1

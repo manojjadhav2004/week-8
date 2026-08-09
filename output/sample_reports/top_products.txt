@@ -1,0 +1,16 @@
+
+=== TOP_PRODUCTS REPORT ===
+
+|   Product ID | Name                 |    Revenue |   Units Sold |
+|--------------|----------------------|------------|--------------|
+|           95 | Than Decor           | 478,495.21 |       191.00 |
+|          106 | Base Bedding         | 390,577.93 |       184.00 |
+|           81 | Ground Decor         | 384,826.16 |       175.00 |
+|          100 | Learn Furniture      | 375,169.16 |       153.00 |
+|           78 | Movie Furniture      | 365,369.17 |       126.00 |
+|          139 | Mrs Non-Fiction      | 338,968.45 |       152.00 |
+|           48 | Old Footwear         | 332,144.28 |       124.00 |
+|           59 | Participant Footwear | 327,999.52 |       121.00 |
+|          138 | Place Fiction        | 325,490.99 |       147.00 |
+|           72 | Likely Footwear      | 323,665.54 |       118.00 |
+

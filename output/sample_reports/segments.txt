@@ -1,0 +1,9 @@
+
+=== SEGMENTS REPORT ===
+
+| Segment    |   Customer Count |
+|------------|------------------|
+| Occasional |              371 |
+| One-Time   |              140 |
+| Loyal      |               46 |
+

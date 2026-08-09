@@ -1,0 +1,14 @@
+table,check,count
+customers,duplicate_rows_removed,6
+customers,invalid_emails_flagged,8
+products,duplicate_rows_removed,4
+products,product_names_normalized,36
+orders,duplicate_rows_removed,5
+orders,missing_customer_id_flagged,80
+orders,date_format_fixed,108
+orders,future_dated_orders_flagged,2
+order_items,duplicate_rows_removed,6
+order_items,unparseable_numeric_rows_dropped,0
+order_items,orphaned_order_id_rows_dropped,8
+order_items,invalid_product_id_rows_dropped,0
+order_items,discount_over_100_capped,16

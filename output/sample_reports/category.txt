@@ -1,0 +1,10 @@
+
+=== CATEGORY REPORT ===
+
+| Category    |      Revenue |
+|-------------|--------------|
+| Home        | 8,664,239.88 |
+| Clothing    | 8,408,074.52 |
+| Electronics | 7,309,482.08 |
+| Books       | 6,860,493.79 |
+

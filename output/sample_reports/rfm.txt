@@ -1,0 +1,12 @@
+
+=== RFM REPORT ===
+
+| RFM Segment         |   Customer Count |   Avg Monetary |
+|---------------------|------------------|----------------|
+| Loyal Customers     |              153 |      66,847.64 |
+| Lost                |              104 |      20,851.71 |
+| Champions           |               85 |     106,444.51 |
+| Regular Customers   |               80 |      34,752.00 |
+| At Risk             |               63 |      72,289.42 |
+| Potential Loyalists |               60 |      18,349.07 |
+

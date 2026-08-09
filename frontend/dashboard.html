@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Commerce Order Analytics Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e2229;
+    --border: #2a2f3a;
+    --text: #e8eaed;
+    --muted: #9aa0ac;
+    --accent: #4f8cff;
+    --green: #3ecf8e;
+    --red: #ef6767;
+    --yellow: #e8b93e;
+    --purple: #a17cf0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 20px 12px;
+    flex-shrink: 0;
+  }
+  .sidebar h1 {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 10px 20px;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .nav-item:hover { background: var(--panel-2); color: var(--text); }
+  .nav-item.active { background: var(--accent); color: white; }
+
+  /* Main */
+  .main { flex: 1; padding: 28px 32px 60px; max-width: 1100px; }
+  .page-title { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  .page-subtitle { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+
+  /* KPI cards */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+  .kpi-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .kpi-value { font-size: 22px; font-weight: 700; }
+
+  /* Panel */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .panel h2 { font-size: 13px; margin: 0 0 16px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .chart-wrap { height: 280px; margin-bottom: 8px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; }
+  td { padding: 9px 10px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--panel-2); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+  .badge.champions { background: rgba(62,207,142,0.15); color: var(--green); }
+  .badge.loyal { background: rgba(79,140,255,0.15); color: var(--accent); }
+  .badge.at-risk { background: rgba(232,185,62,0.15); color: var(--yellow); }
+  .badge.lost { background: rgba(239,103,103,0.15); color: var(--red); }
+  .badge.default { background: rgba(161,124,240,0.15); color: var(--purple); }
+
+  .loading, .error, .empty { color: var(--muted); font-size: 13px; padding: 30px 0; text-align: center; }
+  .error { color: var(--red); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h1>E-Commerce<br>Analytics</h1>
+  <div class="nav-item active" data-page="overview">📊 Overview</div>
+  <div class="nav-item" data-page="revenue">💰 Revenue</div>
+  <div class="nav-item" data-page="category">🗂️ Category</div>
+  <div class="nav-item" data-page="top_products">📦 Top Products</div>
+  <div class="nav-item" data-page="top_customers">👤 Top Customers</div>
+  <div class="nav-item" data-page="aov">🧾 AOV</div>
+  <div class="nav-item" data-page="segments">🔀 Segments</div>
+  <div class="nav-item" data-page="rfm">🎯 RFM</div>
+  <div class="nav-item" data-page="retention">🔁 Retention</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="page active" id="page-overview">
+    <div class="page-title">Overview</div>
+    <div class="page-subtitle">Key metrics across the whole dataset</div>
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="panel">
+      <h2>Monthly Revenue Trend</h2>
+      <div class="chart-wrap"><canvas id="overviewRevenueChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <h2>Revenue by Category</h2>
+      <div class="chart-wrap"><canvas id="overviewCategoryChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- REVENUE -->
+  <div class="page" id="page-revenue">
+    <div class="page-title">Monthly Revenue</div>
+    <div class="page-subtitle">Revenue trend across all months in the dataset</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="revenueChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="revenueTable"></div></div>
+  </div>
+
+  <!-- CATEGORY -->
+  <div class="page" id="page-category">
+    <div class="page-title">Revenue by Category</div>
+    <div class="page-subtitle">Which product categories drive the most revenue</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="categoryChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="categoryTable"></div></div>
+  </div>
+
+  <!-- TOP PRODUCTS -->
+  <div class="page" id="page-top_products">
+    <div class="page-title">Top Products</div>
+    <div class="page-subtitle">Best-selling products by revenue and units sold</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="topProductsChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="top_productsTable"></div></div>
+  </div>
+
+  <!-- TOP CUSTOMERS -->
+  <div class="page" id="page-top_customers">
+    <div class="page-title">Top Customers</div>
+    <div class="page-subtitle">Highest-value customers by total revenue</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="topCustomersChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="top_customersTable"></div></div>
+  </div>
+
+  <!-- AOV -->
+  <div class="page" id="page-aov">
+    <div class="page-title">Average Order Value</div>
+    <div class="page-subtitle">Order value distribution across the dataset</div>
+    <div class="kpi-grid" id="aovGrid"></div>
+  </div>
+
+  <!-- SEGMENTS -->
+  <div class="page" id="page-segments">
+    <div class="page-title">Purchase Frequency Segments</div>
+    <div class="page-subtitle">One-Time vs Occasional vs Loyal customers</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="segmentsChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="segmentsTable"></div></div>
+  </div>
+
+  <!-- RFM -->
+  <div class="page" id="page-rfm">
+    <div class="page-title">RFM Customer Segmentation</div>
+    <div class="page-subtitle">Recency, Frequency, Monetary-based customer segments</div>
+    <div class="panel"><div class="chart-wrap"><canvas id="rfmChart"></canvas></div></div>
+    <div class="panel"><h2>Data</h2><div id="rfmTable"></div></div>
+  </div>
+
+  <!-- RETENTION -->
+  <div class="page" id="page-retention">
+    <div class="page-title">Cohort Retention</div>
+    <div class="page-subtitle">% of each cohort still ordering in months 0–3 after first purchase</div>
+    <div class="panel"><h2>Data</h2><div id="retentionTable"></div></div>
+  </div>
+
+</div>
+
+<script>
+Chart.defaults.color = '#9aa0ac';
+Chart.defaults.borderColor = '#2a2f3a';
+Chart.defaults.font.size = 12;
+
+const rupee = n => 'Rs. ' + Number(n).toLocaleString('en-IN', {maximumFractionDigits: 0});
+const num = n => Number(n).toLocaleString('en-IN');
+const COLORS = ['#4f8cff', '#3ecf8e', '#e8b93e', '#ef6767', '#a17cf0', '#4dd0e1', '#f06292', '#81c784'];
+
+const charts = {};
+function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function renderTable(containerId, headers, rows, numericCols = []) {
+  const el = document.getElementById(containerId);
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data.</div>'; return; }
+  let html = '<table><thead><tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>';
+  for (const row of rows) {
+    html += '<tr>' + row.map((v, i) => {
+      const cls = numericCols.includes(i) ? 'num' : '';
+      let display = v;
+      if (typeof v === 'number') display = numericCols.includes(i) && Math.abs(v) > 1000 ? num(v) : v;
+      return `<td class="${cls}">${display === null ? '–' : display}</td>`;
+    }).join('') + '</tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data;
+}
+
+// ---------- OVERVIEW ----------
+async function loadOverview() {
+  const kpi = await fetchJSON('/api/overview');
+  document.getElementById('kpiGrid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-label">Total Revenue</div><div class="kpi-value">${rupee(kpi.total_revenue)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Total Orders</div><div class="kpi-value">${num(kpi.total_orders)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Unique Customers</div><div class="kpi-value">${num(kpi.total_customers)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Avg Order Value</div><div class="kpi-value">${rupee(kpi.average_order_value)}</div></div>
+  `;
+
+  const rev = await fetchJSON('/api/report/revenue');
+  destroyChart('overviewRevenueChart');
+  charts['overviewRevenueChart'] = new Chart(document.getElementById('overviewRevenueChart'), {
+    type: 'line',
+    data: {
+      labels: rev.rows.map(r => r[0]),
+      datasets: [{ label: 'Revenue', data: rev.rows.map(r => r[1]), borderColor: '#4f8cff', backgroundColor: 'rgba(79,140,255,0.1)', fill: true, tension: 0.3 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  const cat = await fetchJSON('/api/report/category');
+  destroyChart('overviewCategoryChart');
+  charts['overviewCategoryChart'] = new Chart(document.getElementById('overviewCategoryChart'), {
+    type: 'doughnut',
+    data: {
+      labels: cat.rows.map(r => r[0]),
+      datasets: [{ data: cat.rows.map(r => r[1]), backgroundColor: COLORS }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+}
+
+// ---------- REVENUE ----------
+async function loadRevenue() {
+  const data = await fetchJSON('/api/report/revenue');
+  destroyChart('revenueChart');
+  charts['revenueChart'] = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: { labels: data.rows.map(r => r[0]), datasets: [{ label: 'Revenue', data: data.rows.map(r => r[1]), backgroundColor: '#4f8cff' }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+  renderTable('revenueTable', data.headers, data.rows, [1]);
+}
+
+// ---------- CATEGORY ----------
+async function loadCategory() {
+  const data = await fetchJSON('/api/report/category');
+  destroyChart('categoryChart');
+  charts['categoryChart'] = new Chart(document.getElementById('categoryChart'), {
+    type: 'bar',
+    data: { labels: data.rows.map(r => r[0]), datasets: [{ label: 'Revenue', data: data.rows.map(r => r[1]), backgroundColor: COLORS }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+  renderTable('categoryTable', data.headers, data.rows, [1]);
+}
+
+// ---------- TOP PRODUCTS ----------
+async function loadTopProducts() {
+  const data = await fetchJSON('/api/report/top_products');
+  destroyChart('topProductsChart');
+  charts['topProductsChart'] = new Chart(document.getElementById('topProductsChart'), {
+    type: 'bar',
+    data: { labels: data.rows.map(r => r[1]), datasets: [{ label: 'Revenue', data: data.rows.map(r => r[2]), backgroundColor: '#3ecf8e' }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+  renderTable('top_productsTable', data.headers, data.rows, [2, 3]);
+}
+
+// ---------- TOP CUSTOMERS ----------
+async function loadTopCustomers() {
+  const data = await fetchJSON('/api/report/top_customers');
+  destroyChart('topCustomersChart');
+  charts['topCustomersChart'] = new Chart(document.getElementById('topCustomersChart'), {
+    type: 'bar',
+    data: { labels: data.rows.map(r => r[1]), datasets: [{ label: 'Revenue', data: data.rows.map(r => r[2]), backgroundColor: '#a17cf0' }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+  renderTable('top_customersTable', data.headers, data.rows, [2]);
+}
+
+// ---------- AOV ----------
+async function loadAov() {
+  const data = await fetchJSON('/api/report/aov');
+  const row = data.rows[0] || [null, null, null, null];
+  document.getElementById('aovGrid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-label">Average Order Value</div><div class="kpi-value">${rupee(row[0])}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Min Order Value</div><div class="kpi-value">${rupee(row[1])}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Max Order Value</div><div class="kpi-value">${rupee(row[2])}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Total Orders</div><div class="kpi-value">${num(row[3])}</div></div>
+  `;
+}
+
+// ---------- SEGMENTS ----------
+async function loadSegments() {
+  const data = await fetchJSON('/api/report/segments');
+  destroyChart('segmentsChart');
+  charts['segmentsChart'] = new Chart(document.getElementById('segmentsChart'), {
+    type: 'doughnut',
+    data: { labels: data.rows.map(r => r[0]), datasets: [{ data: data.rows.map(r => r[1]), backgroundColor: COLORS }] },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+  renderTable('segmentsTable', data.headers, data.rows, [1]);
+}
+
+// ---------- RFM ----------
+function rfmBadgeClass(segment) {
+  const map = { 'Champions': 'champions', 'Loyal Customers': 'loyal', 'At Risk': 'at-risk', 'Lost': 'lost' };
+  return map[segment] || 'default';
+}
+
+async function loadRfm() {
+  const data = await fetchJSON('/api/report/rfm');
+  destroyChart('rfmChart');
+  charts['rfmChart'] = new Chart(document.getElementById('rfmChart'), {
+    type: 'bar',
+    data: { labels: data.rows.map(r => r[0]), datasets: [{ label: 'Customers', data: data.rows.map(r => r[1]), backgroundColor: COLORS }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  const el = document.getElementById('rfmTable');
+  let html = '<table><thead><tr>' + data.headers.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>';
+  for (const row of data.rows) {
+    html += `<tr>
+      <td><span class="badge ${rfmBadgeClass(row[0])}">${row[0]}</span></td>
+      <td class="num">${num(row[1])}</td>
+      <td class="num">${rupee(row[2])}</td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+// ---------- RETENTION ----------
+async function loadRetention() {
+  const data = await fetchJSON('/api/report/retention');
+  renderTable('retentionTable', data.headers, data.rows, [1, 2, 3, 4]);
+}
+
+const LOADERS = {
+  overview: loadOverview,
+  revenue: loadRevenue,
+  category: loadCategory,
+  top_products: loadTopProducts,
+  top_customers: loadTopCustomers,
+  aov: loadAov,
+  segments: loadSegments,
+  rfm: loadRfm,
+  retention: loadRetention,
+};
+
+const loaded = new Set();
+
+async function showPage(pageName) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === pageName));
+  document.querySelectorAll('.page').forEach(el => el.classList.toggle('active', el.id === `page-${pageName}`));
+
+  if (!loaded.has(pageName)) {
+    try {
+      await LOADERS[pageName]();
+      loaded.add(pageName);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => showPage(el.dataset.page));
+});
+
+showPage('overview');
+</script>
+</body>
+</html>
